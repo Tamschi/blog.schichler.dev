@@ -101,6 +101,9 @@ paginate: 10
 
 # ------------ The following options are not recommended to be modified ------------------
 
+# See <http://www.marran.com/tech/creating-redirects-with-jekyll/>.
+redirects: yes
+
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:   # Rouge Options › https://github.com/jneen/rouge#full-options

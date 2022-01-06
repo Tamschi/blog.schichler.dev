@@ -104,7 +104,7 @@ This *in my case*:
 1. [Removes (`rm`)](http://www.man7.org/linux/man-pages/man1/rm.1.html), recursively (`-r`), all files and directories (`*`) inside the mounted host directory.
 
 2. [Copies (`cp`)](http://www.man7.org/linux/man-pages/man1/cp.1.html), recursively (`-r`), the contents of (`--no-target-directory`) my build directory inside the container (`bundle`) into the mounted host directory visible at `/mnt/target` inside the container.  
-💁‍♂️ *Instead of writing `--no-target-directory`, you could append *`/*`* to the source directory to use shell expansion. I don't know whether this makes a practical difference.*
+💁‍♂️ *Instead of writing `--no-target-directory`, you could append* `/*` *to the source directory to use shell expansion. I don't know whether this makes a practical difference.*
 
 ### Running the Task
 

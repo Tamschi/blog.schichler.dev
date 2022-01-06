@@ -23,6 +23,7 @@ I've adjusted some things that likely aren't useful upstreamed.
 ### Changes
 
 - `.gitattributes` normalises line endings to `lf` now by default, everywhere.
+- Added [redirects](http://www.marran.com/tech/creating-redirects-with-jekyll/) (but with a slightly nicer page and a short delay).
 
 ## Features
 

@@ -1,9 +1,19 @@
-## Building non-containers with Docker and VS Code
+---
+title: Building non-containers with Docker and VS Code
+date: 2020-02-27 14:48:00 +0100
+categories: [Build Automation]
+tags: [VS Code, Docker]
+redirects:
+  - /building-non-containers-with-docker-and-vs-code
+  - /building-non-containers-with-docker-and-vs-code-ck74szgf807g9d9s1s6o88c8f
+---
 
 > In this post:
+>
 > - example configuration
 > - command line breakdowns
 > - links to relevant documentation
+
 - - -
 
 I recently set up containerised builds for [my website](https://schichler.dev/) [It's not quite ready yet.] and thought I'd share the configuration for others to use as reference.
@@ -14,7 +24,7 @@ Additionally, some command lines will contain placeholders with example content 
 
 ### .vscode/tasks.json
 
-```json
+```jsonc
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format¹
@@ -50,12 +60,13 @@ Additionally, some command lines will contain placeholders with example content 
     ]
 }
 ```
+{: file=".vscode/tasks.json"}
 
 ¹ [Integrate with External Tools via Tasks](https://go.microsoft.com/fwlink/?LinkId=733558); comment from default *tasks.json*.  
 ² See [# Processing task output with problem matchers](https://code.visualstudio.com/docs/editor/tasks#_processing-task-output-with-problem-matchers).
 
 This creates the following entry in the Tasks: Run Build Task command menu, by default bound to Ctrl + Shift + B:  
-![Code_JVjZIdealV.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1582800675358/UHG9unECP8.png)  
+![[Select the build task to run] > Build schichler-dev](/assets/img/posts/2020-02-27-Building non containers with Docker and VS Code/run task Build schichler-dev.png)  
 ...which runs the following shell commands in dependent sequence:
 ```sh
 docker build -t {EX:schichler-dev} -f {EX:schichler-dev/Dockerfile} {EX:.}

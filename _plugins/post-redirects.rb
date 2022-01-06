@@ -40,7 +40,7 @@ module Jekyll
       self.process(@name)
 
       self.read_yaml(File.join(base, '_layouts'), 'redirect.html')
-      self.data['source_url'] = destination
+      self.data['redirect_to'] = destination
 
     end
 

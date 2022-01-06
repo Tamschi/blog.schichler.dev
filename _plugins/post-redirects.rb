@@ -17,7 +17,7 @@ module Jekyll
 
     # Find posts and create redirect pages.
     def generate_redirects(site)
-      site.posts.select{|post| post.data.key? 'redirects' }.each do |post|
+      site.posts.docs.select{|post| post.data.key? 'redirects' }.each do |post|
         post.data['redirects'].each do |redirect|
           redirect = RedirectPage.new(site, site.source, redirect, post.id)
           redirect.render(site.layouts, site.site_payload)

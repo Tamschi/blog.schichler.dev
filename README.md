@@ -16,7 +16,13 @@
 
 </div>
 
-## This is a customised fork.
+## This is a customised fork
+
+I've adjusted some things that likely aren't useful upstreamed.
+
+### Changes
+
+- `.gitattributes` normalises line endings to `lf` now by default, everywhere.
 
 ## Features
 

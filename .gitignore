@@ -2,6 +2,7 @@
 .*
 !.git*
 !.editorconfig
+!.markdownlint.*
 !.nojekyll
 !.travis.yml
 

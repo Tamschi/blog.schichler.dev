@@ -10,3 +10,13 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 @import "{{ site.theme }}";
 
 /* append your custom style below */
+
+.tooltip, .license-wrapper {
+  /* This can have multiple lines now. */
+  white-space: pre-line;
+}
+
+.share-label {
+  /* This actually looks a bit cleaner with the multi-line license text. */
+  vertical-align: text-bottom;
+}

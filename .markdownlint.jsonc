@@ -1,0 +1,5 @@
+{
+  "line-length": false,
+  "blanks-around-fences": false, // To specify file names, for example.
+  "no-hard-tabs": false // Instead, the tab width is set to 4 via site style.
+}

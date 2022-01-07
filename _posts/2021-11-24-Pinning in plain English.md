@@ -2,15 +2,22 @@
 title: Pinning in plain English
 date: 2021-11-24 17:10:00 +0100
 categories: [Rust, Pinning]
-tags: [patterns, api]
+tags: [patterns, api, guide]
 redirects:
   - /pinning-in-plain-english
   - /pinning-in-plain-english-ckwdq3pd0065zwks10raohh85
+image:
+  src: /assets/img/posts/2021-11-24-Pinning in plain English/bell pepper chirality.png
+  width: 1298
+  height: 650
+  alt: |-
+    A tasty-looking orange bell pepper is sitting on a wooden cutting board in the left half of the image.
+    The right half of the image is an exact copy of the left half, except horizontally flipped, giving the impression of a mirror plane at the centre.
 ---
 
-> The header image shows an orange bell pepper sitting on a wooden cutting board.
->
-> The same bell pepper has been mirrored into the right half of the image. It is still clearly the same fruit, but the mirror image would largely only be compatible with a fundamentally different biology, as many of its more complex molecules are chiral.
+<!-- markdownlint-disable no-inline-html -->
+
+> A mirrored bell pepper is still clearly the same fruit, but the mirror image, if physically placed outside the mirror, would largely only be compatible with a fundamentally different biology, as many of its more complex molecules are chiral.
 >
 > It was fresh and refreshing.
 - - -

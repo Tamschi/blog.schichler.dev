@@ -1,19 +1,39 @@
-## Semantic FFI Bindings in Rust -
-Reactivating the Borrow Checker
+---
+title: |-
+  Semantic FFI Bindings in Rust -
+  Reactivating the Borrow Checker
+date: 2020-10-31 16:10:00 +0100
+categories: [Rust, FFI]
+tags: [patterns, api, walkthrough]
+redirects:
+  - /semantic-ffi-bindings-in-rust-reactivating-the-borrow-checker
+  - /semantic-ffi-bindings-in-rust-reactivating-the-borrow-checker-ckgxtoxo8057pwrs174dqhcsi
+image:
+  src: /assets/img/posts/2020-12-31-Semantic FFI Bindings in Rust - Reactivating the Borrow Checker/unsafe!Ferris on Pebble (edited, scaled for blog).jpg
+  width: 1200
+  height: 630
+  alt: |-
+    Unsafe!Ferris (a sea urchin) displayed in black and white on my original-generation Pebble, with a custom black watch band with red red stitched border.
+    The watch is laid flat on a red pillow.
+---
 
 > In this post:
+>
 > - Rust references, opaque handles and ownership
 > - Likely pitfalls or: `c_void` isn't (yet) C's `void`
 > - One big caveat
 > - Lifetime-generic opaque references and callbacks
+
 - - -
+
 > - Prerequisites:  
 >   The Rustonomicon's pages on [How Safe and Unsafe Interact](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) and on [FFI](https://doc.rust-lang.org/nomicon/ffi.html)  
 > - Optional reading:  
 >   [cppreference.com on the `restrict` type qualifier](https://en.cppreference.com/w/c/language/restrict)
+
 - - -
 
-🎨 *The image displayed on my watch is unsafe!Ferris by @&zwj;whoisaldeka on Twitter, first posted [here](https://twitter.com/whoisaldeka/status/674465785557860353) under CC-BY... though *technically* speaking I downscaled the SVG version that's in the Rustonomicon.*
+🎨 *The image displayed on my watch is unsafe!Ferris by @&zwj;whoisaldeka on Twitter, first posted [here](https://twitter.com/whoisaldeka/status/674465785557860353) under CC-BY... though* technically *speaking I downscaled the SVG version that's in the Rustonomicon.*
 
 I recently succeeded at writing a watch app for my old Kickstarter Pebble and made some discoveries in the process that may be interesting to others working on similar projects or FFI bindings in general. This post is part one of a two-part series, with the other (planned to be) covering some tricks you can use when wrapping an OOP C API.
 
@@ -24,7 +44,6 @@ Should the feature change, please ping me with a comment and I'll update this po
 A good starting point when writing FFI bindings is to transliterate the original C headers as closely as possible. For example's sake, we'll examine a few functions from [this page](https://developer.rebble.io/developer.pebble.com/docs/c/User_Interface/Window/index.html) of the Pebble SDK docs:
 
 ```c
-// C
 typedef struct Layer Layer;
 typedef struct Window Window;
 
@@ -33,7 +52,7 @@ bool window_is_loaded(Window * window);
 window_set_background_color(Window * window, GColor background_color);
 struct Layer * window_get_root_layer(const Window * window);
 void window_destroy(Window * window);
-``` 
+```
 becomes
 ```rust
 extern "C" {
@@ -52,6 +71,8 @@ extern "C" {
 
 A more interesting, and unique, property is that references (`&` and `&mut`) to extern types are FFI-safe as slim pointers while the type itself is considered unsized.  
 Rust normally really likes to reorganise the backing storage of references: Small values passed by reference can be "inlined" and passed by value instead, if that produces faster or smaller code. Even data behind a mutable reference can be copied and later written back due to [Rust's strict aliasing rules](https://doc.rust-lang.org/nomicon/aliasing.html). However, if the size of the data isn't known, it *can't:*
+
+<!-- markdownlint-disable no-trailing-punctuation -->
 
 ### Rust preserves pointer identity of references to extern types!
 
@@ -154,7 +175,7 @@ pub enum c_void {
 
 That's not unsized. It's actually quite a bit smaller than a usual reference too, so the compiler will most likely shift this memory around a lot if we create a `&` or `&mut` reference to this type!
 
-💁‍♂️ *[But even creating the Rust references would be undefined behaviour already](https://doc.rust-lang.org/nomicon/what-unsafe-does.html), if we use it as stand-in for opaque C types: We can't be sure that the memory location contains a valid discriminant for this enum (or, for that matter, *exists at all*, but that's secondary here). Creating a Rust reference to a (potentially) invalid value is immediately unsound, even without dereferencing it!*
+💁‍♂️ *[But even creating the Rust references would be undefined behaviour already](https://doc.rust-lang.org/nomicon/what-unsafe-does.html), if we use it as stand-in for opaque C types: We can't be sure that the memory location contains a valid discriminant for this enum (or, for that matter,* exists at all*, but that's secondary here). Creating a Rust reference to a (potentially) invalid value is immediately unsound, even without dereferencing it!*
 
 ### There is a better way (coming)
 

@@ -1,4 +1,12 @@
-## Pinning in plain English
+---
+title: Pinning in plain English
+date: 2021-11-24 17:10:00 +0100
+categories: [Rust, Pinning]
+tags: [patterns, api]
+redirects:
+  - /pinning-in-plain-english
+  - /pinning-in-plain-english-ckwdq3pd0065zwks10raohh85
+---
 
 > The header image shows an orange bell pepper sitting on a wooden cutting board.
 >
@@ -28,7 +36,7 @@ Alright, on to the actual content!
 Note that I've added links to (mostly) the Rust documentation in various places.  
 These are "further reading", so I recommend reading this post entirely before looking into them. They'll (hopefully) be much easier to understand that way around.
 
-# The Problem
+## The Problem
 
 **In Rust, any instance is considered trivially movable** as long as its size is known at compile-time, which means that anyone who owns or has an `&mut` (a plain exclusive reference) to an instance can copy its unstructured data (i.e. its directly contained bytes) to a different memory address, and can then expect nothing to break when they reuse the old location otherwise or use the moved instance.
 
@@ -48,7 +56,7 @@ Rust-style references (`&` or `&mut`) are lightweight pointers with some aliasin
 
 All this together makes it tricky to write a memory-safe API that relies on the known location of an instance between calls into it, as **taking continuous possession of it through ownership or a borrow would be inflexible** and often inconvenient, and **using an indirect handle would be too inefficient** for many low-level components.
 
-# Pinning TL;DR (simplified)
+## Pinning TL;DR (simplified)
 
 Instead, **Rust opts to explicitly change the visible type of a reference (and with that the API) to prevent accidental moves outside of `unsafe` code**.
 
@@ -60,7 +68,7 @@ Whenever a type implements [`Unpin`](https://doc.rust-lang.org/stable/core/marke
 
 **For simplicity, types of pinned values (in this post: `T`) are implied to be `!Unpin` for the rest of this post, unless otherwise noted.** This means some sentences won't be true if you, for example, try to pin an `f64` or a `struct` where all of its members are `Unpin`. Please keep this in mind while reading on.
 
-# "pin" vs. "pinned"
+## "pin" vs. "pinned"
 
 Whenever pinning happens in Rust, there are two components involved:
 
@@ -75,7 +83,7 @@ Whenever pinning happens in Rust, there are two components involved:
 
   This is always a specific value, not all members of a type in general, as "pinned" is *not* an inherent property of any type.
 
-# Pins are often compounds
+## Pins are often compounds
 
 For example, look at the signature of [`Box::pin`](https://doc.rust-lang.org/stable/alloc/boxed/struct.Box.html#method.pin):
 
@@ -103,7 +111,7 @@ This, including `Unpin` on the pin, is the same for all standard smart pointers 
 
 I often shorten "pinning `Box`" to "`Pin`-`Box`" for myself when reading silently, and you should be understood when saying it out loud like that too.
 
-# `Unpin` is an auto trait
+## `Unpin` is an auto trait
 
 Very few types in Rust are actually `!Unpin`. As [`Unpin`](https://doc.rust-lang.org/stable/core/marker/trait.Unpin.html) is an [`auto trait`](https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html), it is implemented for all composed types (structs, enums and unions) whose members are `Unpin` already. It's auto-implemented for nearly all built-in types and **implemented explicitly also for [pointers](https://doc.rust-lang.org/stable/std/primitive.pointer.html)**! This means that pointer wrappers like [`NonNull`](https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html) are *also* `Unpin`!
 
@@ -111,13 +119,13 @@ In fact, the only type that is explicitly `!Unpin` as of stable Rust 1.56, inclu
 
 You can see the full list of (non-)implementors here: [`Unpin`#implementors](https://doc.rust-lang.org/stable/core/marker/trait.Unpin.html#implementors)
 
-# Values (mostly) don't start out pinned
+## Values (mostly) don't start out pinned
 
 Even for `T` where `T` is not `Unpin`, a plain instance of `T` on the stack or accessible through a plain `&mut T` is not yet pinned. This also means it could be discarded without running its destructor, by calling [`mem::forget`](https://doc.rust-lang.org/stable/core/mem/fn.forget.html) with it as parameter for example.
 
 An instance of `T` only becomes pinned when passed to a function like `Box::pin` that makes [these guarantees](https://doc.rust-lang.org/stable/core/pin/index.html#drop-guarantee) (and ideally exposes `Pin<&T>` somehow, as necessary).
 
-# Function of `Pin<_>`
+## Function of `Pin<_>`
 
 The only differences between `Box<T>` and `Pin<Box<T>>` are that:
 
@@ -146,7 +154,7 @@ In order to keep the rest of the post easy to read:
 | `P` | `P: Deref<Target = T>`,<br>optionally `P: DerefMut` | "pointer" |
 | `Pin<P>` | `P: Deref<Target = T>`,<br>optionally `P: DerefMut` | "pinning pointer" |
 
-# Pinning is a compile-time-only concept
+## Pinning is a compile-time-only concept
 
 `Pin<P>` is a [`#[repr(transparent)]`](https://doc.rust-lang.org/stable/reference/type-layout.html#the-transparent-representation) wrapper around its single member, a private field with type `P`.
 
@@ -165,7 +173,7 @@ The only exception to this, where a `&`-referenced instance's copy can appear wi
 (Side-note: Don't implement `Copy` on types where identity matters at all. Deriving [`Clone`](https://doc.rust-lang.org/stable/core/clone/trait.Clone.html) is usually enough.  
 `Copy` is largely convenience for immutable instances that you want to pass by value a lot, so for example [`Cell`](https://doc.rust-lang.org/stable/core/cell/struct.Cell.html) does not implement it even if the underlying type does.)
 
-# Pinning is a matter of perspective
+## Pinning is a matter of perspective
 
 A value becomes pinned by making it impossible for safe Rust to move the instance or free its memory without dropping it first. (A pin giving safe Rust access to `Pin<&T>` or `Pin<&mut T>` asserts this formally, especially towards `T`'s unrelated implementation.)
 
@@ -178,7 +186,7 @@ This is especially true for pins with [interior mutability](https://doc.rust-lan
 Safe code inside such modules will (currently) often handle `&mut T` while a derived `Pin<&T>` could have been presented outwards before, and extra care must be taken to avoid unsound moves in that case.  
 This may change in the future as more pinning pointers and collections become available and if Rust makes it easier to add methods to custom types wrapped in `Pin<_>`.
 
-# Collections can pin
+## Collections can pin
 
 This is most obvious with `Box<T>` or `Pin<Box<T>>` where the `Box` acts as 1-item collection of `T`. The same can be said about these types with "`Arc`" and "`Rc`" instead of "`Box`".
 
@@ -199,7 +207,7 @@ A collection `C` "can pin" if it allows some projection from its pinned form (`&
 
 A collection may also be *inherently* pinning, in which case it will act like `Pin<C>` without `Pin` appearing in the type. We won't look at this kind of collection directly here.
 
-# `Pin<P>` vs. `Pin<C>` vs. `T`
+## `Pin<P>` vs. `Pin<C>` vs. `T`
 
 How plain (non-pinning) pointers and collections behave should be clear enough, so I'll only compare how their and `T`'s API *tend to* differ when they are pinning or pinned:
 
@@ -215,11 +223,11 @@ How plain (non-pinning) pointers and collections behave should be clear enough, 
 ¹ If implemented that way, then `pub fn clone_unpinning(this: &Pin<Self>) -> Self { … }` can also be implemented. However, if `T: Clone`, then it's likely that `T` is also `Unpin`, which makes pinning pretty much useless.  
 See the end of this post for a more useful implementation that can clone meaningfully pinned instances also.
 
-# Which functions require `Pin<&T>`?
+## Which functions require `Pin<&T>`?
 
 How `Pin<&T>` and `Pin<&mut T>` are used varies, but there are three broad categories most cases fall into:
 
-## Avoiding reference-counting
+### Avoiding reference-counting
 
 If smart pointers to an instance are copied often but accessed rarely, and references cannot be used because their lifetime can't be constrained statically, then it makes sense to shift the runtime cost from cloning the pointers into a validity check on access instead. The smart pointers are replaced by copiable handles, in this case.
 
@@ -227,7 +235,7 @@ How do the handles know when their target has disappeared? Pinning a `T` asserts
 
 This also enables use cases where the handles cannot be dropped explicitly, like if they are stored directly by an arena allocator like [`bumpalo`](https://crates.io/crates/bumpalo). You can see an example of this pattern in my crate [`lignin`](https://docs.rs/lignin/0.1/lignin/), which supports (V)DOM callbacks this way.
 
-## Embedding externally-managed data
+### Embedding externally-managed data
 
 My crate [`tiptoe`](https://lib.rs/crates/tiptoe) stores its smart pointers' reference counts directly inside the hosted value instances. Pinning allows them to still expose an exclusive reference as `Pin<&mut T>`.
 
@@ -235,7 +243,7 @@ You can read more about intrusive reference-counting and the heap-only pattern i
 
 %[https://blog.schichler.dev/intrusive-smart-pointers-heap-only-types-ckvzj2thw0caoz2s1gpmi1xm8]
 
-## Persisting self-references
+### Persisting self-references
 
 Consider the following [`async`](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) block:
 
@@ -256,7 +264,7 @@ This ensures that instances of `impl Future` will only enter such a state when t
 
 Side note: Pinning is a huge deal for safe `async` performance! *As even instances of eventually self-referential `impl Future`s start out unpinned, they are directly composable* without workarounds like lifting their state onto the heap on demand. This results in less fragmentation, less unusual control flow and smaller code size (before inlining, at least) in the generated state machines, all of which makes it much easier to evaluate them quickly. (Or rather: It raises the ceiling for what an async runtime can reasonably achieve, as it won't be held back by generated code it has no control over. While a simple async runtime is fairly easy to write in Rust, great ones are schedulers that operate very "close to the metal" and as such are often strongly affected by hardware quirks. Their development is quite interesting to follow.)
 
-# Weakening non-moveability
+## Weakening non-moveability
 
 For the final section of this post, let's take a step back and look at the initial pinning guarantee again.
 
@@ -310,11 +318,11 @@ The `CopyNew` trait can be implemented more broadly than the standard [`Clone`](
 
 - - -
 
-# Thanks
+## Thanks
 
-To @[Robin Pederson](@TheBerkin) and @[telios](@telios) for proof-reading and various suggestions on how to improve clarity, and to [Milou](https://github.com/jimkoen) for criticism and suggestions from a C++ perspective.
+To [Robin Pederson](https://hashnode.com/@TheBerkin) and [telios](https://hashnode.com/@telios) for proof-reading and various suggestions on how to improve clarity, and to [Milou](https://github.com/jimkoen) for criticism and suggestions from a C++ perspective.
 
-# License and Translations (in detail)
+## License and Translations (in detail)
 
 This post as a whole with exception of citations is licensed under [CC BY-NC-SA 2.0](https://creativecommons.org/licenses/by-nc-sa/2.0/). All code samples (that is: code blocks and snippets formatted `like this`), except for citations, are additionally licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), so that you can freely use them in your projects under any license or no license.
 

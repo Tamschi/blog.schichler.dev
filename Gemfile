@@ -20,3 +20,8 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
 # Jekyll <= 4.2.0 compatibility with Ruby 3.0
 gem "webrick", "~> 1.7"
+
+# # For the rich link preview plugin.
+# # "link_preview_generator" would be more convenient, but there's a "nokogiri" conflict that causes ISSUES at least on Windows.
+# # Deactivated because I can't get it to not break other things. See <_plugins/link-preview-bodge.rb>.
+# gem "link_preview"

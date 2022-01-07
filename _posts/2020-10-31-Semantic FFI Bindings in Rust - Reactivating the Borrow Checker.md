@@ -378,7 +378,7 @@ pub type NumberWindowCallback =
 
 💁‍♂️ *Rust's documentation doesn't quite spell out that this is possible for plain function pointers in addition [to traits](https://doc.rust-lang.org/stable/reference/trait-bounds.html#higher-ranked-trait-bounds), or what to call it. The one specific mention I found after digging for a bit is the `ForLifetimes?` in the formal grammar on [function pointer types](https://doc.rust-lang.org/stable/reference/types/function-pointer.html), which just links to the section on where clauses.*
 
-(Thanks for the correction, @[Mazdak Farrokhzad](@centril)!)
+(Thanks for the correction, [Mazdak Farrokhzad](https://hashnode.com/@centril)!)
 
 ### What's next
 

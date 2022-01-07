@@ -75,15 +75,17 @@ docker run [OPT:--read-only] --mount type=bind,source=${workspaceFolder}{EX:/tar
 
 *In my case*:
 
-1. [Make the directory (`mkdir`)](http://www.man7.org/linux/man-pages/man1/mkdir.1.html) path (`--parents`) `target/bundle/schichler-dev`, if it doesn't exist yet (`--parents`).  
-💁‍♂️ *Windows requires special handling here, since Windows's [MKDIR](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/md) will error if the directory already exists, isn't configurable in that regard, and also doesn't support `/` as path separator.  
-`CMD /E:ON /C` makes sure command extensions are on (default since 2000/XP) so we can create the entire path at once.  
-`if not exist target/bundle/schichler-dev/NUL` makes sure `target/bundle/schichler-dev` doesn't exist **as a directory** already, by checking for the special file `NUL` within it.  
-See <https://stackoverflow.com/a/4165472>.*
+<!-- markdownlint-disable ol-prefix -->
 
-2.  1. [Build](http://manpages.org/docker-build) a Docker image and tag (`-t`) it as `schichler-dev`(`:latest`).  
+1. [Make the directory (`mkdir`)](http://www.man7.org/linux/man-pages/man1/mkdir.1.html) path (`--parents`) `target/bundle/schichler-dev`, if it doesn't exist yet (`--parents`).  
+  💁‍♂️ *Windows requires special handling here, since Windows's [MKDIR](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/md) will error if the directory already exists, isn't configurable in that regard, and also doesn't support `/` as path separator.  
+  `CMD /E:ON /C` makes sure command extensions are on (default since 2000/XP) so we can create the entire path at once.  
+  `if not exist target/bundle/schichler-dev/NUL` makes sure `target/bundle/schichler-dev` doesn't exist **as a directory** already, by checking for the special file `NUL` within it.  
+  See <https://stackoverflow.com/a/4165472>.*
+2.
+   1. [Build](http://manpages.org/docker-build) a Docker image and tag (`-t`) it as `schichler-dev`(`:latest`).  
 Use the Docker file (`-f`) located at `schichler-dev/Dockerfile`³ and use `.`⁴ as context root.
-  2. [Run](http://manpages.org/docker-run) the Docker image tagged `schichler-dev` with its internal file system read-only (`--read-only`)⁵, while mounting (`--mount`) `${workspaceFolder}/target/bundle/schichler-dev`⁶ mutably inside the container as `/mnt/target`. Remove (`--rm`) the container instance afterwards.
+   2. [Run](http://manpages.org/docker-run) the Docker image tagged `schichler-dev` with its internal file system read-only (`--read-only`)⁵, while mounting (`--mount`) `${workspaceFolder}/target/bundle/schichler-dev`⁶ mutably inside the container as `/mnt/target`. Remove (`--rm`) the container instance afterwards.
 
 ³ You don't need to specify this for a `Dockerfile` in the context root.  
 ⁴ The folder opened in Code is the working directory for the command.  

@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <div align="center">
 
   # Chirpy Jekyll Theme

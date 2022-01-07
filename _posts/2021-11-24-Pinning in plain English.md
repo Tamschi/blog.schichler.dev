@@ -246,9 +246,9 @@ This also enables use cases where the handles cannot be dropped explicitly, like
 
 My crate [`tiptoe`](https://lib.rs/crates/tiptoe) stores its smart pointers' reference counts directly inside the hosted value instances. Pinning allows them to still expose an exclusive reference as `Pin<&mut T>`.
 
-You can read more about intrusive reference-counting and the heap-only pattern it enables in this earlier post:
+You can read more about intrusive reference-counting and the heap-only pattern it enables in this earlier post: [Intrusive Smart Pointers + Heap Only Types = 💞](https://blog.schichler.dev/intrusive-smart-pointers-heap-only-types-ckvzj2thw0caoz2s1gpmi1xm8)
 
-%[https://blog.schichler.dev/intrusive-smart-pointers-heap-only-types-ckvzj2thw0caoz2s1gpmi1xm8]
+<!--FIXME: The above should be a rich preview, somehow. -->
 
 ### Persisting self-references
 

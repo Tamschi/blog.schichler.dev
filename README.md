@@ -27,6 +27,10 @@ I've adjusted some things that likely aren't useful upstreamed.
 - Added [redirects](http://www.marran.com/tech/creating-redirects-with-jekyll/) (but with a slightly nicer page and a short delay).
 - Adjusted `.editorconfig` to not trim trailing whitespace or insert a final newline.
   (These settings caused problems with `editorconfig.editorconfig` in VS Code.)
+- Replaced the default licensing blurbs with ones that grant no rights beyond copies for personal use (which is a given anyway in most legislations), along with a small disclaimer.  
+  Of the predefined locales I only speak English unfortunately, so I deleted the others for consistency.
+
+This list isn't entirely comprehensive. Diff against upstream to see all differences.
 
 ## Features
 

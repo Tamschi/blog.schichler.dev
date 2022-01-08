@@ -335,6 +335,6 @@ This post as a whole with exception of citations is licensed under [CC BY-NC-SA 
 
 Citations from official Rust projects retain their original `MIT OR Apache-2.0` license and are used as permitted at <https://www.rust-lang.org/policies/licenses>. Sorry about the complexity here, unfortunately my country barely recognises fair use.
 
-If you translate this post, please let me know so that I can link it [above](#heading-license-and-translations). I should be able to post a German translation myself before long.
+If you translate this post, please let me know so that I can link it [above](#license-and-translations). I should be able to post a German translation myself before long.
 
 (I suggest using the same license structure for code snippets in translations as here, though this is not something I can enforce. If a translation uses a different license, you can likely still take the code you need from the original here under CC0.)

@@ -3,6 +3,10 @@ title: Pinning in plain English
 date: 2021-11-24 17:10:00 +0100
 categories: [Rust, Pinning]
 tags: [patterns, api, guide]
+preview: |-
+  Pinning in Rust is a powerful and very convenient pattern that is, in my eyes, not supported well enough in the wider ecosystem. […]
+  This post is my attempt to make the feature more approachable, to hopefully inspire more developers to make their crates pinning-aware where that would be helpful.
+pin: true
 redirects:
   - /pinning-in-plain-english
   - /pinning-in-plain-english-ckwdq3pd0065zwks10raohh85

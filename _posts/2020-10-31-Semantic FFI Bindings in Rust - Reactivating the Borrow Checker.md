@@ -5,6 +5,8 @@ title: |-
 date: 2020-10-31 16:10:00 +0100
 categories: [Rust, FFI]
 tags: [patterns, api, walkthrough]
+preview: |-
+  I recently succeeded at writing a watch app for my old Kickstarter Pebble and made some discoveries in the process that may be interesting to others working on similar projects or FFI bindings in general.
 redirects:
   - /semantic-ffi-bindings-in-rust-reactivating-the-borrow-checker
   - /semantic-ffi-bindings-in-rust-reactivating-the-borrow-checker-ckgxtoxo8057pwrs174dqhcsi

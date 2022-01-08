@@ -3,6 +3,9 @@ title: Building non-containers with Docker and VS Code
 date: 2020-02-27 14:48:00 +0100
 categories: [Build Automation]
 tags: [VS Code, Docker]
+preview: |-
+  I recently set up containerised builds for my website [It's not quite ready yet.]
+  and thought I'd share the configuration for others to use as reference.
 redirects:
   - /building-non-containers-with-docker-and-vs-code
   - /building-non-containers-with-docker-and-vs-code-ck74szgf807g9d9s1s6o88c8f

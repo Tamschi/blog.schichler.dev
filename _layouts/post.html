@@ -36,7 +36,7 @@ tail_includes:
 <div class="post-meta text-muted">
 
   <!-- author -->
-  <div>
+  <div style="float: left; clear: left;">
     {% capture author_name %}{{ page.author.name | default: site.social.name }}{% endcapture %}
     {% assign author_link = nil %}
 
@@ -56,7 +56,18 @@ tail_includes:
     </em>
   </div>
 
-  <div class="d-flex">
+  <!-- categories -->
+  {% if page.categories.size > 0 %}
+  <div style="float: right; clear: right;">
+    <i class="far fa-folder-open fa-fw mr-1"></i>
+    {% for category in page.categories %}
+      <a href='{{ site.baseurl }}/categories/{{ category | slugify | url_encode }}/'>{{ category }}</a>
+      {%- unless forloop.last -%}, {%- endunless -%}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="d-flex" style="float: left; clear: left;">
     <div>
       <!-- published date -->
       <span>
@@ -87,6 +98,21 @@ tail_includes:
     </div>
 
   </div> <!-- .d-flex -->
+
+  <!-- tags -->
+  {% if page.tags.size > 0 %}
+  <div class="post-tags" style="float: right; clear: right;">
+    <i class="fa fa-tags fa-fw mr-1"></i>
+      {% for tag in page.tags %}
+      <a href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
+          class="post-tag no-text-decoration" >
+        {{- tag -}}
+      </a>
+      {% endfor %}
+  </div>
+  {% endif %}
+
+  <div style="clear: both;"><!-- End of layout crimes. --></div>
 
 </div> <!-- .post-meta -->
 

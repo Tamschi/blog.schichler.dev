@@ -30,6 +30,7 @@ I've adjusted some things that likely aren't useful upstreamed.
 - Replaced the default licensing blurbs with ones that grant no rights beyond copies for personal use (which is a given anyway in most legislations), along with a small disclaimer.  
   Of the predefined locales I only speak English unfortunately, so I deleted the others for consistency.
 - In addition to categories, tags are displayed on post at HOME.
+- Display categories and tags also at the start of each post.
 
 This list isn't entirely comprehensive. Diff against upstream to see all differences.
 

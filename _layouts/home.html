@@ -51,10 +51,14 @@ layout: page
     </h1>
 
     <div class="post-content">
-      <p>
-        {% include no-linenos.html content=post.content %}
-        {{ content | markdownify | strip_html | truncate: 200 | escape }}
-      </p>
+      {% if post.preview %}
+        <p style="white-space: pre-line; -webkit-line-clamp: unset;">{{ post.preview }}</p>
+      {% else %}
+        <p>
+          {% include no-linenos.html content=post.content %}
+          {{ content | markdownify | strip_html | truncate: 200 | escape }}
+        </p>
+      {% endif %}
     </div>
 
     <div class="post-meta text-muted d-flex">

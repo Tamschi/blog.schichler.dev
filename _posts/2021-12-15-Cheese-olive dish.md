@@ -1,6 +1,25 @@
-## Cheese-olive dish
+---
+title: |-
+  Cheese-olive dish
+date: 2021-12-15 18:48:00 +0100
+categories: [Cooking, Salads]
+tags: [cheese, olives, chili, pepper]
+preview: |-
+  A snack sure-ish to make you more alert.
+pin: true
+redirects:
+  - /cheese-olive-dish
+  - /cheese-olive-dish-ckx7tv8ma0159z7s11qxt3497
+image:
+  src: /assets/img/posts/2021-12-15-Cheese-olive dish/A wake-up snack header image 2.png
+  width: 1200
+  height: 630
+  alt: |-
+    A small glass bowl filled with with pieces of white brined cheese and olives, sprinkled with chili flakes and ground black pepper.
+---
 
-> The cover image shows the finished snack in a small glass salad bowl.  
+<!-- markdownlint-disable no-inline-html -->
+
 > One of these days I'll get a light box, but today is not that day.
 
 I don't only write software, so there will occasionally be other topics mixed in here.
@@ -10,7 +29,9 @@ but can get rid of sleepiness quite quickly.
 
 - - -
 
-# Cheese-olive dish
+## Cheese-olive dish
+
+A wake-up snack.
 
 - - -
 
@@ -20,7 +41,7 @@ but can get rid of sleepiness quite quickly.
 
 - - -
 
-#### Ingredients (1 serving)
+### Ingredients (1 serving)
 
 | Ingredient | Amount | Notes |
 |---|---|---|
@@ -31,14 +52,14 @@ but can get rid of sleepiness quite quickly.
 
 - - -
 
-#### Utensils
+### Utensils
 
 - A sharp knife and small cutting board
 - An appetiser bowl
 
 - - -
 
-#### Steps
+### Steps
 
 Cut the **cheese** into ~1.5cm cuboids and pile it and the **olives** up in the appetiser bowl.
 
@@ -48,7 +69,7 @@ Finish with a bit of **pepper** to taste.
 
 - - -
 
-#### Comments
+### Comments
 
 I don't drink coffee, so to wake myself up if I'm really half-asleep, I like to go with (fresh or spicy preserved) produce.
 

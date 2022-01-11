@@ -3,8 +3,7 @@ title: Intrusive Smart Pointers + Heap Only Types = 💞
 date: 2021-11-14 18:44:00 +0100
 categories: [Rust]
 tags: [patterns, api, walkthrough, crate included]
-preview: |-
-  A convenient reference-counting optimisation with (now) negative net effort.
+preview: Reducing API complexity with an embedded reference counter.
 pin: true
 redirects:
   - /intrusive-smart-pointers-heap-only-types

@@ -1,6 +1,24 @@
-## Intrusive Smart Pointers + Heap Only Types = 💞
+---
+title: Intrusive Smart Pointers + Heap Only Types = 💞
+date: 2021-11-14 18:44:00 +0100
+categories: [Rust]
+tags: [patterns, api, walkthrough, crate included]
+preview: |-
+  A convenient reference-counting optimisation with (now) negative net effort.
+pin: true
+redirects:
+  - /intrusive-smart-pointers-heap-only-types
+  - /intrusive-smart-pointers-heap-only-types-ckvzj2thw0caoz2s1gpmi1xm8
+image:
+  src: /assets/img/posts/2021-11-14-Intrusive Smart Pointers + Heap Only Types = 💞/TauamyRb8.jpg
+  width: 1600
+  height: 840
+  alt: |-
+    A Feynman diagram showing how an intrusive `Pin<Arc<Node>>` cloned via `&Node`. The initial `Pin<Arc<Node>>` remains unchanged. An `&Node` is derived from it. As this `&Node` is converted into a full `Pin<Arc<Node>>`, an unlabeled green wavy connector shoots off and mutates the dashed `Node` instance with a slight delay.
+---
 
 > In this post:
+>
 > - Heap only types: Where do they appear?
 > - Handling heap only types: `Box`, `Rc` and `Arc`
 > - Cloning a handle from a heap-only borrow? (Yes, but…)
@@ -11,25 +29,30 @@
 > - The `Clone` hole ⚠
 >   - Plugging the `Clone` hole
 > - Where to go from here
+
 - - -
+
 > Prior work:
+>
 > - The initial approach is inspired by [`triomphe::ArcBorrow`](https://docs.rs/triomphe/0.1/triomphe/struct.ArcBorrow.html).
+
 - - -
+
 > Cover image made using <https://feynman.aivazis.com/>.  
-> Not physically accurate. Time is horizontal. Lifetime dependencies omitted.  
-> Description: A Feynman diagram showing how an intrusive `Pin<Arc<Node>>` cloned via `&Node`. The initial `Pin<Arc<Node>>` remains unchanged. An `&Node` is derived from it. As this `&Node` is converted into a full `Pin<Arc<Node>>`, an unlabeled green wavy connector shoots off and mutates the dashed `Node` instance with a slight delay.
+> Not physically accurate. Time is horizontal. Lifetime dependencies omitted.
+
 - - -
 
 Please note that this post is a proof of concept. I'm confident it can be implemented in a way that has no or negative overhead compared to, for example, the standard library's smart pointers, but I have not gotten around to do this yet.
 
-# Heap Only Types
+## Heap Only Types
 
 Rust can model (at least) two kinds of heap-only-ish types: [Unsized types](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=Unsized%20Type#dynamically-sized-types-and-the-sized-trait), which cannot be placed on the stack by the compiler because their size is unknown, and **semantically heap-only types**, which are contextually heap-only whenever an API doesn't allow them to be observable elsewhere.
 As usual, these limitations don't exist for `unsafe` Rust, which is beyond the scope of this post.
 
 The type examined here is only semantically heap-only towards a consumer in a different crate, but the pattern I present also works for unsized (dynamically-sized) types.
 
-## Where do they appear?
+### Where do they appear?
 
 There is an opportunity to make a type heap-only whenever it would otherwise be useless. A good example is the following reference-counted inverse tree:
 
@@ -84,7 +107,7 @@ impl<T> Node<T> {
 
 Note that the above doesn't make `Node` heap-only yet!
 
-# Handling heap only types
+## Handling heap only types
 
 To restrict a type to the heap, we [pin](https://doc.rust-lang.org/stable/core/pin/index.html) it behind a smart pointer (in this case [`Arc`](https://doc.rust-lang.org/stable/alloc/sync/struct.Arc.html)) as follows:
 
@@ -124,7 +147,7 @@ The `.get(…)` method remains unchanged as `&Node` is still accessible through 
 `.get_mut(…)` and `.make_mut(…)` have been removed for now since the Rust standard library doesn't provide equivalents of *its* [`Arc::get_mut`](https://doc.rust-lang.org/stable/alloc/sync/struct.Arc.html#method.get_mut) and [`Arc::make_mut`](https://doc.rust-lang.org/stable/alloc/sync/struct.Arc.html#method.make_mut) functions for `Pin<Arc<…>>`.  
 Note that even exclusively held `Node`'s are effectively read-only now. There are work-arounds for all of this, of course, but they involve a lot of `unsafe`. This feature will safely come back later on, though.
 
-# Cloning a handle from a heap-only borrow?
+## Cloning a handle from a heap-only borrow?
 
 When borrowing the contents of an `Arc<T>`, we usually want to handle a `&T` rather than an `&Arc<T>` to avoid a double-indirection when accessing the value.
 
@@ -276,7 +299,7 @@ That's fairly nice now. The only sticking points are that we have a `NodeBorrow<
 
 Exposing two bespoke helper types to fix clumsy signatures also isn't ideal, but more of an incidental issue.
 
-# Can this be more idiomatic?
+## Can this be more idiomatic?
 
 Let's say we had a hypothetical `Arc<T>` that was legal to borrow from `&T`. Let's also say it was pinning-aware so that we can skip some boilerplate while preventing any de-boxing.
 
@@ -335,11 +358,11 @@ impl<T> Node<T> {
 
 The `Arc` can't know that our `Node` is only ever visible behind `Arc`, so we have to provide a safe `.clone_handle()` method ourselves.
 
-# Heap-only mutability
+## Heap-only mutability
 
 The signature of an exclusive borrow in Rust is `Pin<&mut _>`. While the `Arc` can't be `DerefMut` (which would allow us to use [`Pin::as_mut`](https://doc.rust-lang.org/stable/std/pin/struct.Pin.html#method.as_mut)), it can generically provide us with pinning alternatives to its `get_mut` and `make_mut` methods.
 
-We can use these to go from `&mut NodeHandle<T>` to `Pin<&mut Node<T>>`. 
+We can use these to go from `&mut NodeHandle<T>` to `Pin<&mut Node<T>>`.
 
 💁‍♂️  *`Pin<&mut Node<T>>` is `Deref<Target = Node<T>>` (because `&mut Node<T>` is the same), so we could access a shared reference and clone the `NodeHandle<T>`, which would give us a parallel shared reference to our now-free-again exclusive reference (`&Node<T>` and parallel `&mut Node<T>`). This would be [extremely bad](https://doc.rust-lang.org/reference/behavior-considered-undefined.html).*
 
@@ -393,7 +416,7 @@ fn test() {
 
 💁‍♂️  *It's likely a good idea to inline `parent_mut` and `value_mut`. However, performance-optimisation is arbitrarily out of scope for this post.*
 
-# Intrusive counting
+## Intrusive counting
 
 The reason `alloc::sync::Arc` and `triomphe::Arc` can't quite soundly go from "`&T`-behind-`Arc<T>`" to a cloned `Arc<T>` is *only* the required out-of-bounds access to the `Arc`'s reference counter in those case.
 
@@ -405,7 +428,7 @@ At this point, only the following types are exposed:
 - A generic guard that ensures mutable borrow exclusivity dynamically.
 - Our `Node<T>`, which contains the entirety of our API.
 
-# How to do this (almost) safely?
+## How to do this (almost) safely?
 
 The necessary smart pointer I needed for the above turned out to be really easy to abstract, so I've turned it into a crate that you can find here: [📦tiptoe](https://crates.io/crates/tiptoe)
 
@@ -473,13 +496,13 @@ impl<T> Node<T> {
 
 As you can see, we assume `&self` is behind a `Pin<Arc<_>>`. `Arc<_>` is ABI-compatible with a plain shared reference, so it can be borrowed from one (via a short detour through `&&self`).
 
-# The `Clone` hole ⚠
+## The `Clone` hole ⚠
 
 `tiptoe::Arc` also provides a `make_mut` function, which has the same copy-on-write functionality as in the standard library. However, there is a problem with making this available for our `Node<T>`: `alloc::sync::Arc::<T>::make_mut` requires `T: Clone`.
 
 We cannot implement `Clone` on `Node<_>` because that would allow a consumer to move from `&Node<T>` to `Node<T>`, an instance decidedly off-heap.
 
-## Plugging the `Clone` hole
+### Plugging the `Clone` hole
 
 For this reason, `tiptoe::Arc::<T>::make_mut` instead requires `tiptoe::ManagedClone`. This trait has the same shape as `Clone` but its methods are `unsafe` and it comes with a caller restriction:
 
@@ -507,7 +530,7 @@ You can find this final step in the implementation here:
 [Tamschi/ances-tree 🔖blog-link/managed-clone (lib.rs#L83-L94)](https://github.com/Tamschi/ances-tree/blob/blog-link/managed-clone/src/lib.rs#L83-L94)  
 The *develop* branch also contains a rehash of the assumptions made at each location where `unsafe` is used.
 
-# Where to go from here
+## Where to go from here
 
 I've implemented tiptoe only as far as I personally need it, so there are a few open points where it could be more useful:
 

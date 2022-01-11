@@ -89,7 +89,15 @@ While this is common for professional web developers to do in HTML too, we have 
 
 You can get a rough estimate of a page's accessibility using the Lighthouse tab in Chomium browsers' developer tools:
 
-![Lighthouse summary for <https://bubble.io/academy>. Points are out of 100. Performance: 32 Accessibility: 38 Best Practices: 80 SEO: 82 Progressive Web App: - 0-49: red/bad 50-89: orange 90-100: green/good](/assets/img/posts/2021-07-19-Some thoughts on Bubble/rjbH0fSfB.png) (*The Bubble website itself appears to be built using their tool, so it too fares badly.  
+![Lighthouse summary for https://bubble.io/academy. Points are out of 100.
+Performance: 32
+Accessibility: 38
+Best Practices: 80
+SEO: 82
+Progressive Web App: -
+0-49: red/bad
+50-89: orange
+90-100: green/good](/assets/img/posts/2021-07-19-Some thoughts on Bubble/rjbH0fSfB.png) (*The Bubble website itself appears to be built using their tool, so it too fares badly.  
 The rating varies by page, but the Academy one seemed like a typical content mix.*)
 
 ## Not no code

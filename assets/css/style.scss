@@ -25,3 +25,7 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
   /* This actually looks a bit cleaner with the multi-line license text. */
   vertical-align: text-bottom;
 }
+
+#sidebar .sidebar-highlight a {
+  color: rgba(197, 185, 152, 0.9);
+}

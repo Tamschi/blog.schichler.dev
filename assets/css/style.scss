@@ -26,6 +26,20 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
   vertical-align: text-bottom;
 }
 
+html:not([mode]), html[mode=light] {
+  --sidebar-highlight-color: rgba(90, 173, 21, 0.9);
+}
+
+@media (prefers-color-scheme: dark) {
+html:not([mode]) {
+  --sidebar-highlight-color: rgba(197, 185, 152, 0.9);
+}
+}
+
+html[mode=dark] {
+  --sidebar-highlight-color: rgba(197, 185, 152, 0.9);
+}
+
 #sidebar .sidebar-highlight a {
-  color: rgba(197, 185, 152, 0.9);
+  color: var(--sidebar-highlight-color);
 }

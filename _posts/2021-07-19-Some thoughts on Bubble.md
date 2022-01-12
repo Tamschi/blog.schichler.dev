@@ -4,7 +4,6 @@ date: 2021-07-19 19:51:00 +0200
 categories: [Web Development]
 tags: [tooling, evaluation, critique, PaaS]
 preview: Examination of a "No Code" web development system.
-pin: true
 redirects:
   - /some-thoughts-on-bubble
   - /some-thoughts-on-bubble-ckraxckvl0tlcz6s1d72ahse6

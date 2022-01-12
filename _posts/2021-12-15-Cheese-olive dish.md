@@ -6,7 +6,6 @@ categories: [Cooking, Salads]
 tags: [cheese, olives, chili, pepper]
 preview: |-
   A snack sure-ish to make you more alert.
-pin: true
 redirects:
   - /cheese-olive-dish
   - /cheese-olive-dish-ckx7tv8ma0159z7s11qxt3497

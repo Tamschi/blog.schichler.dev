@@ -1,11 +1,9 @@
 ---
 title: Hire me!
-icon: fas fa-info-circle
+icon: fas fa-keyboard
 order: 5
+highlight: true
 ---
-
-
-(I'm not really used to doing free-form self-promotion, but this blog has by far the most relevant reach, so I'll try anyway. Please excuse smaller issues in form. Scroll down for details on availability and contact information.)
 
 If you're looking for a developer who
 
@@ -29,7 +27,7 @@ If you're looking for a developer who
 
 then I may be a good fit for the position 👨‍💻
 
-I'm looking for engaging and **challenging work** where I can **push the boundaries of my own understanding** and, ideally, of user freedom and features (or combinations of features) that are feasible to implement. I'm quick on the uptake and have considerable transferable skills, so even in a new domain I should be good to go within a few weeks.
+I'm looking for engaging and **challenging work** where I can **push the boundaries of my own understanding** and, ideally, of **user freedom and what is feasible to implement**. I'm quick on the uptake and have considerable transferable skills, so even in a new domain I should be good to go within a few weeks.
 
 **Here are some ideas for roles or positions that I think I'd shine in as-is**:
 
@@ -42,7 +40,7 @@ I'm looking for engaging and **challenging work** where I can **push the boundar
 
 I **speak German natively**, am **fluent in English** (in speech and writing), **understand written and spoken French** (though I'm a bit too rusty at this point to correctly use it myself) and can read technical texts in Portuguese.
 
-I'm a very fast reader and regularly skim the entire documentation of new technology I'm unfamiliar with (within reason), so that I can later look up specifics within seconds and **use the right tool or pattern as each situation demands**.
+I'm a very fast reader and regularly skim the entire documentation of new technology I'm unfamiliar with, so that I can later look up specifics within seconds and **use the right tool or pattern as each situation demands**.
 
 - - -
 

@@ -33,6 +33,7 @@ I've adjusted some things that likely aren't useful upstreamed.
 - Display categories and tags also at the start of each post.
 - Post previews (the excepts displayed on the HOME page) are customisable using the `preview` property in their YAML headers.
 - You can highlight tabs in the sidebar by setting `highlight: true`.
+- The site avatar is entirely optional and will not take up space when commented out in `_config.yml`.
 
 This list isn't entirely comprehensive. Diff against upstream to see all differences.
 

@@ -39,7 +39,7 @@ copyright:
   # Shown at the bottom of the post
   license:
     template: |-
-      This post is :LICENSE_NAME for any purpose, unless otherwise noted.
+      This post is :LICENSE_NAME for any purpose, unless otherwise noted.<br>
       It is provided AS IS without any guarantee of correctness beyond those required for legal reasons.
     name: not licensed
     link: 'https://creativecommonsusa.org/wp-content/uploads/2018/01/Copyright-and-Open-Licensing-Primer.pdf'
@@ -48,7 +48,6 @@ copyright:
   brief: Most rights reserved.
   verbose: |-
     Except where otherwise noted, the blog posts on this site are not licensed for redistribution by the author.
-
     (Feel free to save a copy for personal use, though. You likely don't even need permission for that.)
 
 meta: Powered by :PLATFORM with :THEME theme.

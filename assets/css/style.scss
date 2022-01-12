@@ -16,7 +16,7 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
   tab-size: 4;
 }
 
-.tooltip, .license-wrapper, h1[data-toc-skip] {
+.tooltip, h1[data-toc-skip] {
   /* This can have multiple lines now. */
   white-space: pre-line;
 }

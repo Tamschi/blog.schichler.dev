@@ -1,0 +1,37 @@
+---
+layout: compress
+permalink: /rss.xml
+# RSS Feed, reference: https://www.rssboard.org/rss-specification
+---
+
+{% capture source %}
+<rss version="0.91">
+  <channel>
+    <title>{{ site.title }}</title>
+    <link>{{ "/" | absolute_url }}</link>
+    <description>{{ site.description }}</description>
+    <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
+  {% for post in site.posts %}
+  {% assign post_absolute_url = post.url | absolute_url %}
+    <item>
+      <title>{{ post.title }}</title>
+      <link>{{ post_absolute_url }}</link>
+
+      {% if post.preview %}
+      <description>{{ post.preview | strip }}</description>
+      {% else %}
+      {% if post.summary %}
+      <description>{{ post.summary | strip }}</description>
+      {% else %}
+      <description>
+          {% include no-linenos.html content=post.content %}
+          {{ content  | strip_html | truncate: 400 }}
+      </description>
+      {% endif %}
+      {% endif %}
+    </item>
+  {% endfor %}
+  </channel>
+</rss>
+{% endcapture %}
+{{ source | replace: '&', '&amp;' }}

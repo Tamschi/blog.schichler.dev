@@ -51,8 +51,7 @@ const allowedDomains = [
   '{{ site.url | split: "//" | last }}',
 
   'fonts.gstatic.com',
-  'fonts.googleapis.com',
-  'cdn.jsdelivr.net'
+  'fonts.googleapis.com'
 ];
 
 /* Requests that include the following path will be banned */

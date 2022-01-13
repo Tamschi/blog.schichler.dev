@@ -48,9 +48,7 @@ const allowedDomains = [
     'www.google-analytics.com',
   {% endif %}
 
-  '{{ site.url | split: "//" | last }}',
-
-  'fonts.gstatic.com'
+  '{{ site.url | split: "//" | last }}'
 ];
 
 /* Requests that include the following path will be banned */

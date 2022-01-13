@@ -35,7 +35,8 @@ I've adjusted some things that likely aren't useful upstreamed.
 - You can highlight tabs in the sidebar by setting `highlight: true`.
 - The site avatar is entirely optional and will not take up space when commented out in `_config.yml`.
 - No entry limit in the Atom feed.
-- There is an unlisted RSS feed at `/rss.xml`
+- There is an unlisted RSS feed at `/rss.xml`.
+- jsDelivr and Google Fonts resources are served from the assets folder, which makes it easier to comply with data protection laws.
 
 This list isn't entirely comprehensive. Diff against upstream to see all differences.
 

@@ -50,8 +50,7 @@ const allowedDomains = [
 
   '{{ site.url | split: "//" | last }}',
 
-  'fonts.gstatic.com',
-  'fonts.googleapis.com'
+  'fonts.gstatic.com'
 ];
 
 /* Requests that include the following path will be banned */

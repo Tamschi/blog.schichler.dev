@@ -53,6 +53,11 @@ build() {
 
   # build
   JEKYLL_ENV=production bundle exec jekyll b -d "$SITE_DIR$_baseurl" --config "$_config"
+
+  # IONOS
+  mkdir "$SITE_DIR$_baseurl/.github"
+  mkdir "$SITE_DIR$_baseurl/.github/workflows"
+  cp "./.github/workflows/deploy-now.yaml_" "$SITE_DIR$_baseurl/.github/workflows/deploy-now.yaml"
 }
 
 test() {

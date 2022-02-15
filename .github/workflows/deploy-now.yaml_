@@ -1,8 +1,4 @@
----
-permalink: /.github/workflows/deploy-now.yaml
-# GDPR-compatible hosting
----
-{% raw %}name: Deploy Now
+name: Deploy Now
 
 on:
   - push
@@ -36,4 +32,3 @@ jobs:
           remote-host: ${{ steps.project.outputs.remote-host }}
           service-host: api-eu.ionos.space
           storage-quota: ${{ steps.project.outputs.storage-quota }}
-{% endraw %}

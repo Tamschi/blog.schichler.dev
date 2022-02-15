@@ -53,11 +53,6 @@ build() {
 
   # build
   JEKYLL_ENV=production bundle exec jekyll b -d "$SITE_DIR$_baseurl" --config "$_config"
-
-  # IONOS
-  mkdir "$SITE_DIR$_baseurl/.github"
-  mkdir "$SITE_DIR$_baseurl/.github/workflows"
-  cp "./.github/workflows/deploy-now.yaml_" "$SITE_DIR$_baseurl/.github/workflows/deploy-now.yaml"
 }
 
 test() {
@@ -96,6 +91,11 @@ backup() {
   # the CANME only exist on `gh-pages` branch
   if [[ -f CNAME ]]; then
     mv CNAME "$_backup_dir"
+  fi
+
+  # This should preserve any workflow set up on the Pages branch (e.g. by IONOS).
+  if [[ -f .github ]]; then
+    mv .github "$_backup_dir"
   fi
 }
 

@@ -94,7 +94,7 @@ backup() {
   fi
 
   # This should preserve any workflow set up on the Pages branch (e.g. by IONOS).
-  if [[ -f .github ]]; then
+  if [[ -d .github ]]; then
     echo "Backing up .github."
     mv .github "$_backup_dir"
   fi

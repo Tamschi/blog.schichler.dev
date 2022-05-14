@@ -15,8 +15,6 @@
   icon: 'fas fa-rss'
   noblank: true
 -
-  type: br
--
   type: email
   icon: 'fas fa-envelope'
   noblank: true            # open link in current tab

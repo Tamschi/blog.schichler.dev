@@ -475,9 +475,9 @@ self.memo.invalidate();
 
 The VDOM tree itself can be trivially dropped, so double-buffering it with a rotating pair of bump allocators is very efficient.
 
-However, the memoisation component above must know when it's safe to drop a cached version of the VDOM, outside of the allocator's `unsafe`ly rotated at the app root.
+However, the memoisation component above must know when it's safe to drop a cached version of the VDOM, without direct knowledge of the main allocators' `unsafe` rotation at the app root.
 
-Relying on a safety contract that prescribes an app lifecycle with repeating elements seemed error-prone, so instead Asteracea uses sparsely aggregated drop guard trees stored in the same bump allocators the VDOM nodes are.
+Relying on a safety contract that prescribes an app lifecycle with repeating elements seemed error-prone, so instead Asteracea uses sparsely aggregated drop guard trees stored in the same bump allocators as the VDOM nodes.
 
 These *may* contain a type-erased drop notification (as well as the VDOM node they guard), but most importantly can be `unsafe`ly split into the notification and VDOM node.
 

@@ -44,9 +44,9 @@ I'm a very fast reader and regularly skim the entire documentation of new techno
 
 - - -
 
-**Availability** (last updated: 2021-12-09)
+**Availability** (last updated: 2022-08-20)
 
-- I plan to take up my next job in either **January or February**.
+- I plan to start my next job somewhere in **October through February**.
 - I'm available in person in **Hamburg (Germany) or, also internationally, remote**, around **25 to 30 hours a week**.
   - I don't own and don't plan to purchase a car, so if your office has a good connection from Altona, then colour me interested 🚉🚏
   - My schedule is flexible and **I can match your time zone** if necessary,  

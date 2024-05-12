@@ -19,6 +19,14 @@ I may edit this post eventually to include the correct Rust Issue link (if the R
 The rendered GitHub version may be a bit easier to navigate, too, as subheading appear in the navigation there.  
 You can show the table of contents using the button at the very right of the sticky header on GitHub.
 
+**Thanks**
+
+- to [@teliosdev](https://github.com/teliosdev) for some very early syntax feedback that helped put me on track,
+- to [@cofinite](https://github.com/cofinite) for pointing out how scoped implementations allow syntax traits to be used as extension traits,
+- to [@thefakeplace](https://github.com/thefakeplace) and to SkiFire13 in the [draft discussion](https://internals.rust-lang.org/t/pre-rfc-scoped-impl-trait-for-type/19923) for suggestions on how to make this RFC more approachable and easier to understand.
+
+<br>
+
 - - -
 
 - Feature Name: `scoped_impl_trait_for_type`

@@ -4,7 +4,7 @@ date: 2024-05-12 18:20:00 +0200
 categories: [Rust, Language Design]
 tags: [Rust, traits, composition, RFC]
 preview: |-
-  I just submitted my first Rust RFC to fix crate-crate composition.  
+  I just posted my first Rust RFC to fix crate-crate composition.  
   Here's the full initially submitted text for posterity.
 pin: true
 ---

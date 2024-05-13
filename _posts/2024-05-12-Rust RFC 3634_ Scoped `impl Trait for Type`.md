@@ -16,7 +16,7 @@ Non-grammar blockquotes are less-formal comments I added as further explanations
 
 I may edit this post eventually to include the correct Rust Issue link (if the RFC is merged), <sub>or to fix embarrassing typos,</sub> but for the most up-to-date version please see the 'RFC PR' linked just below this.
 
-The rendered GitHub version may be a bit easier to navigate, too, as subheading appear in the navigation there.  
+The rendered GitHub version may be a bit easier to navigate, too, as subheadings appear in the navigation there.  
 You can show the table of contents using the button at the very right of the sticky header on GitHub.
 
 **Thanks**

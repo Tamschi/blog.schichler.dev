@@ -32,7 +32,7 @@ You can show the table of contents using the button at the very right of the sti
 - Feature Name: `scoped_impl_trait_for_type`
 - Start Date: 2024-05-12
 - RFC PR: [rust-lang/rfcs#3634](https://github.com/rust-lang/rfcs/pull/3634)
-- Rust Issue: [rust-lang/rust#0000](https://github.com/rust-lang/rust/issues/0000)
+- Rust Issue: <!-- [rust-lang/rust#0000](https://github.com/rust-lang/rust/issues/0000) --> (to be added if merged)
 
 # Summary
 [summary]: #summary

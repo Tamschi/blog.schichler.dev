@@ -31,8 +31,8 @@ url: 'https://blog.schichler.dev'
 github:
   username: Tamschi             # change to your github username
 
-twitter:
-  username: 'tammeschichler'            # change to your twitter username
+# twitter:
+#   username: 'tammeschichler'            # change to your twitter username
 
 social:
   # Change to your full name.

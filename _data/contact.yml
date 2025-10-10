@@ -27,9 +27,9 @@
   type: mastodon
   icon: 'fab fa-mastodon'   # icons powered by <https://fontawesome.com/>
   url:  'https://nerdculture.de/@Tamschi'
--
-  type: twitter
-  icon: 'fab fa-twitter'
+# -
+#   type: twitter
+#   icon: 'fab fa-twitter'
 # -
 #   type: linkedin
 #   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>

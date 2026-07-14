@@ -1,5 +1,6 @@
 ---
 layout: none
+permalink: /.well-known/site.standard.publication
 ---
 
 at://did:plc:qx3u424v7twdlqcokqpzifna/site.standard.publication/abstraction-haven

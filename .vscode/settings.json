@@ -16,5 +16,6 @@
         "timeago",
         "upstreamed",
         "Wechat"
-    ]
+    ],
+    "git.enabled": false
 }
